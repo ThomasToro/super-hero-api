@@ -1,29 +1,31 @@
 import axios from "axios";
 
 
-const ACCESS_TOKEN= "4b35d671e882c8680186c067bab35ef6";
+const ACCESS_TOKEN= "139b2f6198630db082b4db99c4a98653";
 
 const URL_BASE= `https://superheroapi.com/api/${ACCESS_TOKEN}`;
 
-export const searchHero= async (name:string) =>{
-    try{
+export const searchHero = async (name: string) => {
+  try {
 
-        const response = await axios.get(`${URL_BASE}/search/${name}`);
+    const response = await axios.get(`${URL_BASE}/search/${name}`);
 
-        const data = response.data;
+    console.log("AXIOS RESPONSE:", response.data);
 
-        if (data.response=== "success"){
-            return data.results[0];
-        }
+    const data = response.data;
 
-        return null;
-   
-    } catch (error){
-        console.log("Error al buscar el heroe", error);
-        return null;
+    if (data.response === "success") {
+      return data.results[0];
     }
 
-}
+    console.log("API ERROR:", data);
+    return null;
+
+  } catch (error) {
+    console.log("Error al buscar el heroe", error);
+    return null;
+  }
+};
 
 export const getHeroById = async (id: string) =>{
 

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
 import SearchBar from "@/src/components/SearchBar";
 import { searchHero, getHeroById, smartSearchHero} from "../../src/services/superheroApi";
+import HeroCard from "@/src/components/HeroCard";
 
 export default function SearchScreen() {
 
@@ -12,8 +13,11 @@ export default function SearchScreen() {
     const result = await smartSearchHero(query);
 
     setHero(result);
-
+    const newHero=hero;
+    console.log("Nuevo heroe:", newHero);
   };
+
+
 
   return (
 
@@ -23,6 +27,8 @@ export default function SearchScreen() {
 
       {hero && (
 
+        console.log(hero.image.url),
+        
         <View style={styles.heroContainer}>
 
           <Image
@@ -31,8 +37,11 @@ export default function SearchScreen() {
           />
 
           <Text style={styles.name}>{hero.name}</Text>
-
+          
+          <HeroCard hero={hero} />
         </View>
+
+        
 
       )}
 
